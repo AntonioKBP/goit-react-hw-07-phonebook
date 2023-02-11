@@ -25,6 +25,9 @@ export const App = () => {
   const dispatch = useDispatch();
   const filter = useSelector(state => state.filter);
   const contacts = useSelector(state => state.contacts.items);
+  const isLoading = useSelector(state => state.contacts.isLoading);
+
+  console.log(isLoading);
 
   useEffect(() => {
     dispatch(getContactsThunk());
