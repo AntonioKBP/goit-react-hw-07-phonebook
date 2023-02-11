@@ -1,5 +1,3 @@
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 const { createSlice } = require('@reduxjs/toolkit');
 const { initState } = require('./users.init-state');
 
@@ -22,15 +20,4 @@ const phoneBookSlice = createSlice({
 export const { userAddAction, userDeleteAction, userFilterAction } =
   phoneBookSlice.actions;
 
-// export const phoneBookReducer = phoneBookSlice.reducer;
-
-const persistConfig = {
-  key: 'phone-book-data',
-  storage,
-  blacklist: ['filter'],
-};
-
-export const phoneBookReducer = persistReducer(
-  persistConfig,
-  phoneBookSlice.reducer
-);
+export const phoneBookReducer = phoneBookSlice.reducer;

@@ -1,8 +1,9 @@
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix';
 import PropTypes from 'prop-types';
+import { getContactsThunk } from 'redux/users/users.thunk';
 
 import {
   userAddAction,
@@ -21,22 +22,13 @@ import {
 } from './TitleAndMainStyled/TitleAndMainStyled.styled';
 
 export const App = () => {
+  const dispatch = useDispatch();
   const filter = useSelector(state => state.filter);
   const contacts = useSelector(state => state.contacts);
 
-  // useEffect(() => {
-  //   console.log('mount');
-  //   const contacts = localStorage.getItem('contacts');
-  //   const ParcedContacts = JSON.parse(contacts);
-  //   console.log(ParcedContacts);
-  //   if (ParcedContacts) {
-  //     // setContacts(ParcedContacts);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
+  useEffect(() => {
+    dispatch(getContactsThunk());
+  }, [dispatch]);
 
   const addUser = data => {
     const findExistsName = contacts.some(contact => contact.name === data.name);
@@ -52,8 +44,6 @@ export const App = () => {
       // setContacts(prevState => [newAbonent, ...prevState]);
     }
   };
-
-  const dispatch = useDispatch();
 
   const handleSearch = e => {
     dispatch(userFilterAction(e.target.value));
