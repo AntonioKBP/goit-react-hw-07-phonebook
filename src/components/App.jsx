@@ -3,13 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix';
 import PropTypes from 'prop-types';
-import { getContactsThunk } from 'redux/users/users.thunk';
+import {
+  addContactsThunk,
+  getContactsThunk,
+  deleteContactsThunk,
+} from 'redux/users/users.thunk';
 
 import {
-  userAddAction,
-  userDeleteAction,
+  // userAddAction,
+  // userDeleteAction,
   userFilterAction,
 } from 'redux/users/users.slice';
+
+import {
+  selectFilterContacts,
+  // selectIsLoading,
+  selectFilteredContacts,
+} from 'redux/users/users.selectors';
 
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
@@ -23,18 +33,18 @@ import {
 
 export const App = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.filter);
-  const contacts = useSelector(state => state.contacts.items);
-  const isLoading = useSelector(state => state.contacts.isLoading);
-
-  console.log(isLoading);
+  const filter = useSelector(selectFilterContacts);
+  const contacts = useSelector(selectFilteredContacts);
+  // const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(getContactsThunk());
   }, [dispatch]);
 
   const addUser = data => {
-    const findExistsName = contacts.some(contact => contact.name === data.name);
+    const findExistsName = contacts.items.some(
+      contact => contact.name === data.name
+    );
     if (findExistsName) {
       Notify.warning(`${data.name} is already in contacts`);
       return;
@@ -43,7 +53,8 @@ export const App = () => {
         id: nanoid(),
         ...data,
       };
-      dispatch(userAddAction(newAbonent));
+      // dispatch(userAddAction(newAbonent));
+      dispatch(addContactsThunk(newAbonent));
       // setContacts(prevState => [newAbonent, ...prevState]);
     }
   };
@@ -52,14 +63,21 @@ export const App = () => {
     dispatch(userFilterAction(e.target.value));
   };
   const handleDeleteContact = contactId => {
-    dispatch(userDeleteAction(contactId));
+    // dispatch(userDeleteAction(contactId));
+    dispatch(deleteContactsThunk(contactId));
     // setContacts(prevState => prevState.filter(item => item.id !== contactId));
   };
 
+  // const filteredContacts = useMemo(() => {
+  //   return contacts.filter(contact =>
+  //     contact.name.toLowerCase().includes(filter.toLowerCase())
+  //   );
+  // }, [contacts, filter]);
+
   const contactsLenght = contacts.length;
-  const newUsers = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  // const newUsers = contacts.filter(contact =>
+  //   contact.name.toLowerCase().includes(filter.toLowerCase())
+  // );
 
   return (
     <Main>
@@ -69,7 +87,7 @@ export const App = () => {
       <SecondartTitle>Contacts</SecondartTitle>
       <Filter filterValue={filter} onSearch={handleSearch} />
       {contactsLenght > 0 && (
-        <ContactList users={newUsers} onDeleteContact={handleDeleteContact} />
+        <ContactList users={contacts} onDeleteContact={handleDeleteContact} />
       )}
     </Main>
   );

@@ -4,11 +4,11 @@ import { RiDeleteBin2Line } from 'react-icons/ri';
 export const ContactList = ({ users, onDeleteContact }) => {
   return (
     <List>
-      {users.map(user => {
+      {users.map(({ id, name, phone }) => {
         return (
-          <ListItem key={user.id}>
-            {user.name}: {user.number}
-            <ListItemBtn type="button" onClick={() => onDeleteContact(user.id)}>
+          <ListItem key={id}>
+            {name}: {phone}
+            <ListItemBtn type="button" onClick={() => onDeleteContact(id)}>
               <RiDeleteBin2Line />
             </ListItemBtn>
           </ListItem>
