@@ -3,10 +3,6 @@ import { getContactsThunk } from './users.thunk';
 const { createSlice } = require('@reduxjs/toolkit');
 const { initState } = require('./users.init-state');
 
-// const handlePending = state => {
-//   state.contacts.isLoading = true;
-// };
-
 const phoneBookSlice = createSlice({
   name: 'users',
   initialState: initState,
