@@ -1,4 +1,8 @@
-import { getContactsThunk, deleteContactsThunk } from './users.thunk';
+import {
+  getContactsThunk,
+  deleteContactsThunk,
+  addContactsThunk,
+} from './users.thunk';
 import { initState } from './users.init-state';
 
 import { createSlice } from '@reduxjs/toolkit';
@@ -42,6 +46,13 @@ const phoneBookSlice = createSlice({
       .addCase(deleteContactsThunk.rejected, (state, { error }) => {
         state.contacts.isLoading = false;
         state.contacts.error = error.message;
+      })
+      .addCase(addContactsThunk.pending, state => {
+        state.contacts.isLoading = true;
+      })
+      .addCase(addContactsThunk.fulfilled, (state, { payload }) => {
+        state.contacts.items = [payload, ...state.contacts.items];
+        state.contacts.isLoading = false;
       });
   },
 });

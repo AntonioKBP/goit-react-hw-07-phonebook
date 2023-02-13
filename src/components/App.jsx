@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix';
 import PropTypes from 'prop-types';
 import {
@@ -50,7 +50,7 @@ export const App = () => {
       return;
     } else {
       const newAbonent = {
-        id: nanoid(),
+        // id: nanoid(),
         ...data,
       };
       // dispatch(userAddAction(newAbonent));
