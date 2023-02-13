@@ -42,9 +42,7 @@ export const App = () => {
   }, [dispatch]);
 
   const addUser = data => {
-    const findExistsName = contacts.items.some(
-      contact => contact.name === data.name
-    );
+    const findExistsName = contacts.some(contact => contact.name === data.name);
     if (findExistsName) {
       Notify.warning(`${data.name} is already in contacts`);
       return;
