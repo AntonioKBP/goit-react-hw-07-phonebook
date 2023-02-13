@@ -17,9 +17,9 @@ const phoneBookSlice = createSlice({
     // userDeleteAction: (state, { payload }) => {
     //   state.contacts = state.contacts.filter(user => user.id !== payload);
     // },
-    // userFilterAction: (state, { payload }) => {
-    //   state.filter = payload;
-    // },
+    userFilterAction: (state, { payload }) => {
+      state.filter = payload;
+    },
   },
   extraReducers: builder => {
     builder

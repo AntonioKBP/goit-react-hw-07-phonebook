@@ -24,3 +24,10 @@ export const SecondartTitle = styled.h2`
   margin: 0 0 10px;
   text-align: center;
 `;
+
+export const LoadingTitle = styled.p`
+  font-size: 15px;
+  font-family: monospace;
+  margin-bottom: 5px;
+  font-weight: 900;
+`;

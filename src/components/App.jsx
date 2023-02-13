@@ -17,7 +17,7 @@ import {
 
 import {
   selectFilterContacts,
-  // selectIsLoading,
+  selectIsLoading,
   selectFilteredContacts,
 } from 'redux/users/users.selectors';
 
@@ -29,19 +29,21 @@ import {
   Main,
   MainTitle,
   SecondartTitle,
+  LoadingTitle,
 } from './TitleAndMainStyled/TitleAndMainStyled.styled';
 
 export const App = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilterContacts);
   const contacts = useSelector(selectFilteredContacts);
-  // const isLoading = useSelector(selectIsLoading);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(getContactsThunk());
   }, [dispatch]);
 
   const addUser = data => {
+    console.log(data);
     const findExistsName = contacts.some(contact => contact.name === data.name);
     if (findExistsName) {
       Notify.warning(`${data.name} is already in contacts`);
@@ -84,6 +86,7 @@ export const App = () => {
 
       <SecondartTitle>Contacts</SecondartTitle>
       <Filter filterValue={filter} onSearch={handleSearch} />
+      {isLoading && <LoadingTitle>Processing your request...</LoadingTitle>}
       {contactsLenght > 0 && (
         <ContactList users={contacts} onDeleteContact={handleDeleteContact} />
       )}

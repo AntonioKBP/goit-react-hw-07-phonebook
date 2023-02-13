@@ -12,7 +12,7 @@ import { useState } from 'react';
 
 export const ContactForm = ({ onSubmit }) => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -20,8 +20,8 @@ export const ContactForm = ({ onSubmit }) => {
       case 'name':
         setName(value);
         break;
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
       default:
         return;
@@ -30,9 +30,9 @@ export const ContactForm = ({ onSubmit }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit({ name, number });
+    onSubmit({ name, phone });
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -52,12 +52,12 @@ export const ContactForm = ({ onSubmit }) => {
               placeholder="Enter Name"
             />
           </Label>
-          <Label htmlFor="number">
+          <Label htmlFor="phone">
             <FormLabelName>Number</FormLabelName>
             <Input
-              value={number}
+              value={phone}
               type="tel"
-              name="number"
+              name="phone"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
