@@ -12,7 +12,7 @@ import {
 import {
   // userAddAction,
   // userDeleteAction,
-  userFilterAction,
+  contactsFilterAction,
 } from 'redux/users/users.slice';
 
 import {
@@ -59,7 +59,7 @@ export const App = () => {
   };
 
   const handleSearch = e => {
-    dispatch(userFilterAction(e.target.value));
+    dispatch(contactsFilterAction(e.target.value));
   };
   const handleDeleteContact = contactId => {
     // dispatch(userDeleteAction(contactId));

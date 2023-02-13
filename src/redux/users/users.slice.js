@@ -8,7 +8,7 @@ import { initState } from './users.init-state';
 import { createSlice } from '@reduxjs/toolkit';
 
 const phoneBookSlice = createSlice({
-  name: 'users',
+  name: 'contacts',
   initialState: initState,
   reducers: {
     // userAddAction: (state, { payload }) => {
@@ -17,7 +17,7 @@ const phoneBookSlice = createSlice({
     // userDeleteAction: (state, { payload }) => {
     //   state.contacts = state.contacts.filter(user => user.id !== payload);
     // },
-    userFilterAction: (state, { payload }) => {
+    contactsFilterAction: (state, { payload }) => {
       state.filter = payload;
     },
   },
@@ -61,19 +61,7 @@ const phoneBookSlice = createSlice({
   },
 });
 
-export const { userAddAction, userDeleteAction, userFilterAction } =
+export const { userAddAction, userDeleteAction, contactsFilterAction } =
   phoneBookSlice.actions;
 
 export const phoneBookReducer = phoneBookSlice.reducer;
-
-// [getContactsThunk.pending]: state => {
-//   state.contacts.isLoading = true;
-// },
-// [getContactsThunk.rejected]: state => {
-//   state.contacts.isLoading = false;
-// },
-// [getContactsThunk.fulfilled]: (state, { payload }) => {
-//   state.contacts.items = payload;
-//   state.contacts.isLoading = false;
-// },
-// [getContactsThunk.fulfilled]: state => (state.contacts.isLoading = false),
