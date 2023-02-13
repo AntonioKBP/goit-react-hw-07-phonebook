@@ -53,6 +53,10 @@ const phoneBookSlice = createSlice({
       .addCase(addContactsThunk.fulfilled, (state, { payload }) => {
         state.contacts.items = [payload, ...state.contacts.items];
         state.contacts.isLoading = false;
+      })
+      .addCase(addContactsThunk.rejected, (state, { error }) => {
+        state.contacts.isLoading = false;
+        state.contacts.error = error.message;
       });
   },
 });
