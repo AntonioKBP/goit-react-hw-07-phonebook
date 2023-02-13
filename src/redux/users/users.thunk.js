@@ -28,7 +28,7 @@ export const addContactsThunk = createAsyncThunk(
       'https://63e666537eef5b22338523c9.mockapi.io/api/contacts-list/contacts',
       { id, name, phone }
     );
-    console.log(data);
+
     return data;
   }
 );
